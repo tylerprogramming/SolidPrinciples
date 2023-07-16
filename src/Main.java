@@ -1,8 +1,14 @@
-import principles.singleresponsibilityprinciple.before.Employee;
+import principles.dependencyinversionprinciple.after.EmailServiceImpl;
+import principles.dependencyinversionprinciple.after.NewMesssageService;
+import principles.dependencyinversionprinciple.after.SMSServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        Employee employee = new Employee("Tyler", 12345, 1000, 2000);
-        employee.calculateSalary();
+        EmailServiceImpl emailService = new EmailServiceImpl();
+        SMSServiceImpl smsService = new SMSServiceImpl();
+
+        NewMesssageService messsageService = new NewMesssageService(smsService);
+
+        messsageService.sendMessage("tyler@example.com", "This is an sms message.");
     }
 }
